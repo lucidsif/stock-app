@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    My Holdings
+{% endblock %}
+
+{% block main %}
+<h3><span class="label label-default pull-right">Holdings Value: ${{ all_holdings_value }}</span></h3>
+<table class="table table-hover">
+    <tr>
+        <th>Symbol</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Shares</th>
+        <th>Total Value</th>
+        <th>Actions</th>
+    </tr>
+    {% for holding in holdings %}
+    <tr>
+        <td>{{ holding.stock_symbol }}</td>
+        <td>{{ holding.stock_name }}</td>
+        <td>${{ holding.stock_price }}</td>
+        <td>{{ holding['sum(stock_quantity)'] }}</td>
+        <td>${{ holding.total_value }}</td>
+        <td>
+            <form>
+                <fieldset>
+                    <div class="form-group">
+                        <input value="{{ holding.stock_symbol }}"autocomplete="off" autofocus class="form-control" name="symbol" placeholder="Enter a stock symbol" type="hidden"/>
+                    </div>  
+                    <div class="form-group">
+                        <input autocomplete="off" autofocus class="form-control" name="shares" placeholder="Enter # of shares" type="number"/>
+                    </div>
+                    <div class="form-group pull-left">
+                        <button formaction="{{ url_for('buy') }}" formmethod="POST" class="btn btn-primary" type="submit">Buy</button>
+                    </div>                      
+                    <div class="form-group pull-left">
+                        <button formaction="{{ url_for('sell') }}" formmethod="POST" class="btn btn-success" type="submit">Sell</button>
+                    </div>            
+                </fieldset>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+    <tr>
+        <td>MY CASH</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>${{ balance }}</td>
+        <td></td>
+    </tr>        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td><b>${{ total_account_value }}</b></td>
+        <td></td>
+    </tr>
+</table>
+{% endblock %}

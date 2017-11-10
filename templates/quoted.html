@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Stock Information
+{% endblock %}
+
+{% block main %}
+<table class="table table-hover">
+    <tr>
+        <th>Symbol</th>
+        <th>Name</th>
+        <th>Shares</th>
+        <th>Price</th>
+    </tr>
+    <tr>
+        <td>{{ data.symbol }}</td>
+        <td>{{ data.name }}</td>
+        <td>1</td>
+        <td>{{ data.price }}</td>
+    </tr>
+</table>
+{% endblock %}
